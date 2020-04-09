@@ -21,7 +21,9 @@
         </svg>
     </a>
     <a href="{% url 'post_draft_list' %}" class="top-menu">draft</a>
-    <p class="top-menu">Hello {{ user.username }} <small>(<a href="{% url 'logout' %}">Log out</a>)</small></p>
+    <p class="top-menu">Hello {{ user.username }}
+        <small>(<a href="{% url 'logout' %}">Log out</a>)</small>
+    </p>
     {% else %}
     <a href="{% url 'login' %}" class="top-menu">login</a>
     {% endif %}
