@@ -1,14 +1,68 @@
 {% extends 'blog/base.html' %}
 
+{% block style %}
+<style type="text/css">
+body {
+	background: #eee !important;
+}
+.wrapper {
+	margin-top: 80px;
+  margin-bottom: 80px;
+}
+.form-sign {
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgb(0,0,0,0.1);
+
+  .form-sign-heading,
+	.checkbox {
+	  margin-bottom: 30px;
+	}
+	.checkbox {
+	  font-weight: normal;
+	}
+	.form-control {
+	  position: relative;
+	  font-size: 16px;
+	  height: auto;
+	  padding: 10px;
+		@include box-sizing(border-box);
+		&:focus {
+		  z-index: 2;
+		}
+	}
+	input[type="text"] {
+	  margin-bottom: -1px;
+	  border-bottom-left-radius: 0;
+	  border-bottom-right-radius: 0;
+	}
+	input[type="password"] {
+	  margin-bottom: 20px;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+	}
+}
+@media(max-width: 500px){
+	footer{
+		height: 130px !important;
+		padding-bottom: 10px;
+		padding-top: 10px;
+	}
+}
+</style>
+{% endblock %}
+
+
 {% block content %}
 <div class="container">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-5 mx-auto">
         <div class="wrapper">
-            <form class="form-signin" method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
-                <h2 class="form-signin-heading">{{ title }}</h2>
+            <form class="form-sign" method="POST" action="" enctype="multipart/form-data" style="margin-top: -30px; margin-bottom: -18px;">{% csrf_token %}
+                <h2 class="form-sign-heading">{{ title }}</h2>
                 {{ form.as_p }}
                 <br>
-                <button class="btn btn-lg btn-ptimary btn-block" type="submit">{{ title }}</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">{{ title }}</button>
                 <br>
                 {% if title == "login" %}<h5>Not Registered? <a href="{% url 'register' %}">Register Here</a> </h5>{% endif %}
                 {% if title == "register" %}<h5>Already Registered? <a href="{% url 'login' %}">Login Here</a> </h5>{% endif %}
@@ -19,34 +73,6 @@
 {% endblock %}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<br>-->
-<!--<br>-->
-<!--{% if form.errors %}-->
-<!--<p>Your Username and Password didn't match. Please try again</p>-->
-<!--{% endif %}-->
 
 <!--<form method="post" action="{% url 'login' %}">-->
 <!--    {% csrf_token %}-->
@@ -63,22 +89,4 @@
 
 <!--    <input class="btn btn-primary" type="submit" value="login"/>-->
 <!--    <input type="hidden" name="next" value="{{ next }}"/>-->
-<!--</form>-->
-
-
-<!--&lt;!&ndash;<form method="post" action="{% url 'login' %}">&ndash;&gt;-->
-<!--&lt;!&ndash;    {% csrf_token %}&ndash;&gt;-->
-<!--&lt;!&ndash;    <table>&ndash;&gt;-->
-<!--&lt;!&ndash;        <tr>&ndash;&gt;-->
-<!--&lt;!&ndash;            <td>{{ form.username.label_tag }}</td>&ndash;&gt;-->
-<!--&lt;!&ndash;            <td>{{ form.username }}</td>&ndash;&gt;-->
-<!--&lt;!&ndash;        </tr>&ndash;&gt;-->
-<!--&lt;!&ndash;        <tr>&ndash;&gt;-->
-<!--&lt;!&ndash;            <td>{{ form.password.label_tag }}</td>&ndash;&gt;-->
-<!--&lt;!&ndash;            <td>{{ form.password }}</td>&ndash;&gt;-->
-<!--&lt;!&ndash;        </tr>&ndash;&gt;-->
-<!--&lt;!&ndash;    </table>&ndash;&gt;-->
-
-<!--&lt;!&ndash;    <input type="submit" value="login"/>&ndash;&gt;-->
-<!--&lt;!&ndash;    <input type="hidden" name="next" value="{{ next }}"/>&ndash;&gt;-->
-<!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--</form>--
