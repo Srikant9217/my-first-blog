@@ -1,17 +1,46 @@
-{% extends 'blog/base.html' %}
+{% extends "blog/base.html" %}
 
 {% block content %}
-{% for post in posts %}
+{% for obj in object_list %}
 <br>
 <div class="card">
     <div class="card-body">
-        <h2 class="card-title">{{ post.title }}</h2>
-        <h6 class="card-subtitle mb-2 text-muted">{{ post.published_date }}</h6>
-        <p class="card-text">{{ post.text|linebreaksbr }}</p>
-        <a href="{% url 'post_detail' pk=post.pk %}" class="stretched-link ">Comments: {{ post.comments.count }}</a>
+        <h2 class="card-title">{{ obj.title }}</h2>
+        <h6 class="card-subtitle mb-2 text-muted">{{ obj.published_date }}</h6>
+        <p class="card-text">{{ obj.text|linebreaksbr }}</p>
+        <a href="{% url 'post_detail' pk=obj.pk %}" class="stretched-link ">Comments: {{ obj.comments.count }}</a>
     </div>
 </div>
-
 {% endfor %}
-{% endblock %}̥
 
+<div class="container">
+    <div class="col-md-6">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    {% if object_list.has_previous %}
+                <li class="previous"><a href="?page={{ object_list.previous_page_number }}">
+                    <span aria-hidden="true">‹</span></a>
+                    {% else %}
+                <li class="previous disabled"><a>‹</a>
+                    {% endif %}
+                </li>
+                {% for page in object_list.paginator.page_range %}
+                {% if page == object_list.number %}
+                <li class="pg active"><a class="page_number" href="?page={{page}}">{{page}}</a>
+                    {% else %}
+                <li class="pg"><a class="page_number" href="?page={{page}}">{{page}}</a>
+                    {% endif %}
+                    {% endfor %}
+                <li class="page-item">  <!-- Jump to Next Page -->
+                    {% if object_list.has_next %}
+                <li class="previous"><a href="?page={{ object_list.next_page_number }}">›</a></li>
+                {% else %}
+                <li class="next disabled"><a>›</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}

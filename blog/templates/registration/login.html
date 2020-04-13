@@ -57,36 +57,17 @@ body {
 {% block content %}
 <div class="container">
     <div class="col-sm-8 col-md-6 col-lg-5 col-xl-4 mx-auto">
-        <div class="wrapper">
+        <div class="">
             <form class="form-sign" method="POST" action="" enctype="multipart/form-data" style="margin-top: -30px; margin-bottom: -18px;">{% csrf_token %}
                 <h2 class="form-sign-heading">{{ title }}</h2>
                 {{ form.as_p }}
                 <br>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">{{ title }}</button>
                 <br>
-                {% if title == "login" %}<h5>Not Registered? <a href="{% url 'register' %}">Register Here</a> </h5>{% endif %}
-                {% if title == "register" %}<h5>Already Registered? <a href="{% url 'login' %}">Login Here</a> </h5>{% endif %}
+                {% if title == "login" %}<h6>Not Registered? <a href="{% url 'register' %}">Register Here</a> </h6>{% endif %}
+                {% if title == "register" %}<h6>Already Registered? <a href="{% url 'login' %}">Login Here</a> </h6>{% endif %}
             </form>
         </div>
     </div>
 </div>
 {% endblock %}
-
-
-
-<!--<form method="post" action="{% url 'login' %}">-->
-<!--    {% csrf_token %}-->
-<!--    <div class="form-group">-->
-<!--        <label for="id_username">User Name</label>-->
-<!--        <input type="text" class="form-control" id="id_username" maxlength="254" name="{{ form.username }}" aria-describedby="emailHelp">-->
-<!--        <small id="emailHelp" class="form-text text-muted">We'll never share your User Name with anyone else.</small>-->
-<!--    </div>-->
-
-<!--    <div class="form-group">-->
-<!--        <label for="exampleInputPassword1">Password</label>-->
-<!--        <input type="password" class="form-control" id="exampleInputPassword1">-->
-<!--    </div>-->
-
-<!--    <input class="btn btn-primary" type="submit" value="login"/>-->
-<!--    <input type="hidden" name="next" value="{{ next }}"/>-->
-<!--</form>--

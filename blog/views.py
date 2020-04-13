@@ -3,12 +3,28 @@ from django.utils import timezone
 from .models import Post
 from .forms import PostForm, CommentForm, UserLoginForm, UsersRegisterForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
+from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
 
 
 def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'blog/post_list.html', {'posts': posts})
+    queryset_list = Post.objects.all().order_by("id")
+    paginator = Paginator(queryset_list, 3)
+    page = request.GET.get('page')
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+
+    context = {
+        "object_list": queryset,
+    }
+    return render(request, "blog/post_list.html", context)
+
+    # posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    # return render(request, 'blog/post_list.html', {'posts': posts})
 
 
 def post_detail(request, pk):
