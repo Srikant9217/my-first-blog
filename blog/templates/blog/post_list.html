@@ -5,7 +5,7 @@
 <br>
 <div class="card">
     <div class="card-body">
-        <h2 class="card-title">{{ obj.title }}</h2>
+        <h1 class="card-title">{{ obj.title }}</h1>
         <h6 class="card-subtitle mb-2 text-muted">{{ obj.published_date }}</h6>
         <p class="card-text">{{ obj.text|linebreaksbr }}</p>
         <a href="{% url 'post_detail' pk=obj.pk %}" class="stretched-link ">Comments: {{ obj.comments.count }}</a>
