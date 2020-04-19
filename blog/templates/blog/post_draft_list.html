@@ -9,9 +9,9 @@
         <h2 class="card-title">{{ post.title }}</h2>
         <h6 class="card-subtitle mb-2 text-muted">Created: {{ post.created_date|date:'d-m-y' }}</h6>
         <p class="card-text">{{ post.text|linebreaksbr }}</p>
-        <a href="{% url 'post_publish' pk=post.pk %}" class="btn btn-primary">Publish</a>
-        <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-primary">Edit</a>
-        <a href="{% url 'post_remove' pk=post.pk %}" class="btn btn-primary">Delete</a>
+        <a href="{% url 'post_publish' slug=post.slug %}" class="btn btn-primary">Publish</a>
+        <a href="{% url 'post_edit' slug=post.slug %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'post_remove' slug=post.slug %}" class="btn btn-primary">Delete</a>
     </div>
 </div>
 
@@ -19,7 +19,7 @@
 <!--    <div class="date">-->
 <!--        <p>Created: {{ post.created_date|date:'d-m-y' }}</p>-->
 <!--    </div>-->
-<!--    <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>-->
+<!--    <h2><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h2>-->
 <!--    <p>{{ post.text|truncatechars:200 }}</p>-->
 <!--</div>-->
 {% endfor %}

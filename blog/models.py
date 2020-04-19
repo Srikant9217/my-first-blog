@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.utils.text import slugify
 
 
 class Post(models.Model):
@@ -9,10 +10,15 @@ class Post(models.Model):
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
+    slug = models.SlugField(blank=True, unique=True)
 
     def publish(self):
         self.published_date = timezone.now()
         self.save()
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
